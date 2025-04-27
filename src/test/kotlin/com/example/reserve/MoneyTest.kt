@@ -50,7 +50,7 @@ class MoneyTest {
     @Test
     fun `비교 연산자 테스트 (작음)`() {
         assertThat(Money.wons(1000)).isLessThan(Money.wons(2000))
-        assertThat(Money.wons(1000)).isEqualByComparingTo(Money.wons(1000))
+        assertThat(Money.wons(1000)).isEqualTo(Money.wons(1000))
         assertThat(Money.wons(2000)).isGreaterThan(Money.wons(1000))
     }
 

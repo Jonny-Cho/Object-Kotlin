@@ -25,7 +25,7 @@ class PeriodConditionTest {
     private val condition = PeriodCondition(
         dayOfWeek = DayOfWeek.MONDAY,
         startTime = LocalTime.of(10, 0),
-        endTime = LocalTime.of(11, 59, 59, 999999999)
+        endTime = LocalTime.of(11, 59)
     )
 
     @Test
@@ -53,7 +53,7 @@ class PeriodConditionTest {
         val screening = Screening(
             movie = dummyMovie,
             sequence = 1,
-            startTime = LocalDateTime.of(2024, 5, 13, 11, 59, 59, 999999999)
+            startTime = LocalDateTime.of(2024, 5, 13, 11, 59)
         )
         assertThat(condition.isSatisfiedBy(screening)).isTrue()
     }
@@ -63,7 +63,7 @@ class PeriodConditionTest {
         val screening = Screening(
             movie = dummyMovie,
             sequence = 1,
-            startTime = LocalDateTime.of(2024, 5, 13, 9, 59, 59, 999999999)
+            startTime = LocalDateTime.of(2024, 5, 13, 9, 59, 59)
         )
         assertThat(condition.isSatisfiedBy(screening)).isFalse()
     }

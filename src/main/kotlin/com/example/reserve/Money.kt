@@ -29,4 +29,14 @@ data class Money(
     override fun compareTo(other: Money): Int {
         return this.amount.compareTo(other.amount)
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Money) return false
+        return this.amount.compareTo(other.amount) == 0
+    }
+
+    override fun hashCode(): Int {
+        return amount.stripTrailingZeros().hashCode()
+    }
 }

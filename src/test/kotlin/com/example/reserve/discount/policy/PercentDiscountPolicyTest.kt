@@ -11,29 +11,28 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 import kotlin.time.Duration.Companion.minutes
 
-private val dummyMovie = Movie(
-    title = "Test Movie",
-    runningTime = 120.minutes,
-    fee = Money.wons(10000),
-    discountPolicy = object : DiscountPolicy() {
-        override fun getDiscountAmount(screening: Screening): Money = Money.ZERO
-    }
-)
-
-private val dummyScreening = Screening(movie = dummyMovie, sequence = 1, startTime = LocalDateTime.now())
-
 class PercentDiscountPolicyTest {
 
     private val movieFee = Money.wons(10000)
-    private val screening = dummyScreening
-    private val percent = BigDecimal("0.1") // 10%
+    private val screening = Screening(
+        movie = Movie(
+            title = "Test Movie",
+            runningTime = 120.minutes,
+            fee = Money.wons(10000),
+            discountPolicy = object : DiscountPolicy() {
+                override fun getDiscountAmount(screening: Screening): Money = Money.ZERO
+            }
+        ),
+        sequence = 1,
+        startTime = LocalDateTime.now(),
+    )
+    private val percent = BigDecimal("0.1")
 
     @Test
     fun `할인 조건 만족 시 비율 할인 적용`() {
         val policy = PercentDiscountPolicy(percent, SatisfiedCondition)
         val expectedDiscount = movieFee.times(percent)
-
-        assertThat(policy.calculateDiscountAmount(screening)).isEqualByComparingTo(expectedDiscount)
+        assertThat(policy.calculateDiscountAmount(screening)).isEqualTo(expectedDiscount)
     }
 
     @Test
@@ -47,7 +46,7 @@ class PercentDiscountPolicyTest {
         val policy = PercentDiscountPolicy(percent, NotSatisfiedCondition, SatisfiedCondition)
         val expectedDiscount = movieFee.times(percent)
 
-        assertThat(policy.calculateDiscountAmount(screening)).isEqualByComparingTo(expectedDiscount)
+        assertThat(policy.calculateDiscountAmount(screening)).isEqualTo(expectedDiscount)
     }
 
     @Test

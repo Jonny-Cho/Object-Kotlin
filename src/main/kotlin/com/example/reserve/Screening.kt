@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 class Screening(
     private val movie: Movie,
     private val sequence: Int,
-    private val whenScreened: LocalDateTime,
+    val startTime: LocalDateTime,
 ) {
     fun reserve(
         customer: Customer,
@@ -13,4 +13,6 @@ class Screening(
     ): Reservation = Reservation(customer, this, calculateFee(audienceCount), audienceCount)
 
     private fun calculateFee(audienceCount: Long): Money = movie.calculatemoviewFee(this).times(audienceCount)
+
+    fun isSequence(sequence: Int) = sequence == this.sequence
 }

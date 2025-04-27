@@ -9,17 +9,16 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 import kotlin.time.Duration.Companion.minutes
 
-// 테스트용 Movie 인스턴스 생성
-private val dummyMovie = Movie(
-    title = "Test Movie",
-    runningTime = 120.minutes,
-    fee = Money.wons(10000),
-    discountPolicy = object : DiscountPolicy() {
-        override fun getDiscountAmount(screening: Screening): Money = Money.ZERO
-    }
-)
 
 class SequenceConditionTest {
+    private val dummyMovie = Movie(
+        title = "Test Movie",
+        runningTime = 120.minutes,
+        fee = Money.wons(10000),
+        discountPolicy = object : DiscountPolicy() {
+            override fun getDiscountAmount(screening: Screening): Money = Money.ZERO
+        }
+    )
 
     @Test
     fun `조건의 순번과 상영 순번이 일치하면 true를 반환한다`() {

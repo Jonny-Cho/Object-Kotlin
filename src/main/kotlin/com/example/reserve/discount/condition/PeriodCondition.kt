@@ -9,9 +9,8 @@ class PeriodCondition(
     private val startTime: LocalTime,
     private val endTime: LocalTime,
 ) : DiscountCondition {
-    override fun isSatisfiedBy(screening: Screening): Boolean {
-        return screening.startTime.dayOfWeek == dayOfWeek &&
-                this.startTime <= screening.startTime.toLocalTime() &&
-                screening.startTime.toLocalTime() <= this.endTime
-    }
+    override fun isSatisfiedBy(screening: Screening): Boolean =
+        screening.startTime.dayOfWeek == dayOfWeek &&
+            this.startTime <= screening.startTime.toLocalTime() &&
+            screening.startTime.toLocalTime() <= this.endTime
 }

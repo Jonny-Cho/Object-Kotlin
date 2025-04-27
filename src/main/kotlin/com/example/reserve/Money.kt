@@ -22,6 +22,10 @@ data class Money(
         return Money(this.amount.multiply(multiplier))
     }
 
+    operator fun times(multiplier: Long): Money {
+        return Money(this.amount.multiply(BigDecimal.valueOf(multiplier)))
+    }
+
     override fun compareTo(other: Money): Int {
         return this.amount.compareTo(other.amount)
     }

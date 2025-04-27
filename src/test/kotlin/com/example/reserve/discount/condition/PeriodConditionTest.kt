@@ -1,14 +1,24 @@
 package com.example.reserve.discount.condition
 
+import com.example.reserve.Money
 import com.example.reserve.Movie
 import com.example.reserve.Screening
+import com.example.reserve.discount.policy.DiscountPolicy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.LocalTime
+import kotlin.time.Duration.Companion.minutes
 
-private val dummyMovie = Movie()
+private val dummyMovie = Movie(
+    title = "Test Movie",
+    runningTime = 120.minutes,
+    fee = Money.wons(10000),
+    discountPolicy = object : DiscountPolicy() {
+        override fun getDiscountAmount(screening: Screening): Money = Money.ZERO
+    }
+)
 
 class PeriodConditionTest {
 

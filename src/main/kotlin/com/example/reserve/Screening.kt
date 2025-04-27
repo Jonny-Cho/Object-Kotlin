@@ -12,7 +12,9 @@ class Screening(
         audienceCount: Long,
     ): Reservation = Reservation(customer, this, calculateFee(audienceCount), audienceCount)
 
-    private fun calculateFee(audienceCount: Long): Money = movie.calculatemoviewFee(this).times(audienceCount)
+    private fun calculateFee(audienceCount: Long): Money = movie.calculateMovieFee(this).times(audienceCount)
 
     fun isSequence(sequence: Int) = sequence == this.sequence
+
+    fun getMovieFee() = movie.fee
 }

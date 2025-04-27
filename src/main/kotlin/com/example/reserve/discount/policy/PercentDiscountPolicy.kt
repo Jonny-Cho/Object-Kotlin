@@ -8,9 +8,6 @@ import java.math.BigDecimal
 class PercentDiscountPolicy(
     private val percent: BigDecimal,
     vararg conditions: DiscountCondition,
-): DiscountPolicy(*conditions) {
-
-    override fun getDiscountAmount(screening: Screening): Money {
-        return screening.getMovieFee().times(percent)
-    }
+) : DiscountPolicy(*conditions) {
+    override fun getDiscountAmount(screening: Screening): Money = screening.getMovieFee().times(percent)
 }

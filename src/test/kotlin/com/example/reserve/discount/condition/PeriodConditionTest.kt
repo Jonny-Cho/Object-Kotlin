@@ -11,16 +11,16 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import kotlin.time.Duration.Companion.minutes
 
-private val dummyMovie = Movie(
-    title = "Test Movie",
-    runningTime = 120.minutes,
-    fee = Money.wons(10000),
-    discountPolicy = object : DiscountPolicy() {
-        override fun getDiscountAmount(screening: Screening): Money = Money.ZERO
-    }
-)
 
 class PeriodConditionTest {
+    private val dummyMovie = Movie(
+        title = "Test Movie",
+        runningTime = 120.minutes,
+        fee = Money.wons(10000),
+        discountPolicy = object : DiscountPolicy() {
+            override fun getDiscountAmount(screening: Screening): Money = Money.ZERO
+        }
+    )
 
     private val condition = PeriodCondition(
         dayOfWeek = DayOfWeek.MONDAY,
